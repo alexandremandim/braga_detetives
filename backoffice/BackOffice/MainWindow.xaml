@@ -1,0 +1,17 @@
+﻿<Window x:Class="BackOffice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BackOffice"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="256.371" Width="395.099">
+    <Grid Height="246" VerticalAlignment="Top" Margin="0,0,0,-17">
+        <Button x:Name="butLogIN" Content="LogIn" HorizontalAlignment="Left" Margin="251,164,0,0" VerticalAlignment="Top" Width="74" Click="button_Click"/>
+        <TextBox x:Name="txtLogIN" HorizontalAlignment="Left" Height="22" Margin="161,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+        <PasswordBox x:Name="txtPass" HorizontalAlignment="Left" Margin="161,99,0,0" VerticalAlignment="Top" Width="164"/>
+        <Label x:Name="lblNome" Content="LogIn:" HorizontalAlignment="Left" Margin="51,42,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPass" Content="Password" HorizontalAlignment="Left" Margin="51,91,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

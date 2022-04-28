@@ -1,0 +1,21 @@
+﻿<Window x:Class="BackOffice.CriarRelatorio"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BackOffice"
+        mc:Ignorable="d"
+        Title="CriarRelatorio" Height="400" Width="550">
+    <Grid>
+        <DataGrid x:Name="dataGridCasos" HorizontalAlignment="Left" Height="125" Margin="50,67,0,0" VerticalAlignment="Top" Width="438"/>
+        <Label x:Name="lblCasos" Content="Casos:" HorizontalAlignment="Left" Margin="50,24,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonEnviarMail" Content="Enviar" HorizontalAlignment="Left" Margin="323,315,0,0" VerticalAlignment="Top" Width="70" Click="enviarEmailButton"/>
+        <Label x:Name="lblEnviarMail" Content="Mail:" HorizontalAlignment="Left" Margin="50,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.286,0.615"/>
+        <TextBox x:Name="textBoxMail" HorizontalAlignment="Left" Height="23" Margin="195,277,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="293"/>
+        <Button x:Name="buttonSair" Content="Sair" HorizontalAlignment="Left" Margin="419,315,0,0" VerticalAlignment="Top" Width="69" Click="buttonSair_Click"/>
+        <Button x:Name="buttonCriarRelatorio" Content="Criar Relatório" HorizontalAlignment="Left" Margin="332,24,0,0" VerticalAlignment="Top" Width="156" Click="criarRelatorioButton"/>
+        <Label x:Name="label" Content="Relatorios gerados:" HorizontalAlignment="Left" Margin="50,227,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbRelatoriosGerados" HorizontalAlignment="Left" Margin="195,227,0,0" VerticalAlignment="Top" Width="293"/>
+
+    </Grid>
+</Window>

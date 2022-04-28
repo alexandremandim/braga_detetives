@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="323bc7c8938a49ad9991d5a52dddee62" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelDiretor.Caso" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelDiretor.Utilizador" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ModelDiretor.FK_Caso_Utilizador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelDiretor.FK_Utilizador_Utilizador" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ModelDiretor.viewInspetoresChefe" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ModelDiretor.viewEquipas" Width="1.5" PointX="3.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

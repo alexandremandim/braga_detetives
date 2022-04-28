@@ -1,0 +1,17 @@
+﻿<Window x:Class="BackOffice.ConcluirCaso"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BackOffice"
+        mc:Ignorable="d"
+        Title="WindowMarcarCasoComoConcluido" Height="400" Width="550">
+    <Grid>
+        <Label x:Name="lblCasoEscolhido" Content="Escolher caso:" HorizontalAlignment="Left" Margin="35,58,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonOK" Content="OK" HorizontalAlignment="Left" Margin="338,291,0,0" VerticalAlignment="Top" Width="75" Click="okButton"/>
+        <Button x:Name="buttonCancel" Content="Sair" HorizontalAlignment="Left" Margin="427,291,0,0" VerticalAlignment="Top" Width="75" Click="sairButton"/>
+        <ComboBox x:Name="cmbCaso" HorizontalAlignment="Left" Height="26" Margin="155,58,0,0" VerticalAlignment="Top" Width="347"/>
+        <Button x:Name="butVerCasos" Content="Ver Casos" HorizontalAlignment="Left" Margin="427,138,0,0" VerticalAlignment="Top" Width="75" Click="verCasosButton"/>
+
+    </Grid>
+</Window>

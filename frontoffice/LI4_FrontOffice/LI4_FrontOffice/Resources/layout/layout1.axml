@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="76.7dp"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="Indicar caminho"
+            android:layout_width="161.0dp"
+            android:layout_height="74.0dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/botaoFoto"
+            android:layout_marginLeft="0.0dp" />
+        <TextView
+            android:text="Descrição:"
+            android:layout_width="194.7dp"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="76.7dp"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:layout_width="161.0dp"
+            android:layout_height="74.0dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/botaoFoto"
+            android:layout_marginLeft="0.0dp"
+            android:text="Tirar fotografia" />
+        <TextView
+            android:text="Objetivos:"
+            android:layout_width="194.7dp"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="76.7dp"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="Registar nota de voz"
+            android:layout_width="161.0dp"
+            android:layout_height="74.0dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/botaoFoto"
+            android:layout_marginLeft="0.0dp" />
+        <TextView
+            android:text="Localização:"
+            android:layout_width="194.7dp"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="76.7dp"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="Registar nota escrita"
+            android:layout_width="161.0dp"
+            android:layout_height="74.0dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/botaoFoto"
+            android:layout_marginLeft="0.0dp" />
+        <TextView
+            android:text="Caso:"
+            android:layout_width="194.7dp"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <Button
+        android:text="obter informações"
+        android:id="@+id/botaoFoto"
+        android:layout_width="160.0dp"
+        android:layout_height="74.0dp" />
+    <Button
+        android:text="Concluir tarefa"
+        android:id="@+id/botaoFoto"
+        android:layout_width="160.0dp"
+        android:layout_height="74.0dp" />
+    <Button
+        android:text="suspender tarefa"
+        android:id="@+id/botaoFoto"
+        android:layout_width="160.0dp"
+        android:layout_height="74.0dp" />
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2f7f351985f144688063309526a39b7f" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelIC.Caso" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelIC.Dados" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelIC.Tarefa" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelIC.Utilizador" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelIC.viewEquipas" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="ModelIC.FK_Caso_Utilizador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelIC.FK_Tarefa_Caso" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelIC.FK_Dados_Tarefa" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelIC.FK_Tarefa_Utilizador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelIC.FK_Utilizador_Utilizador" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

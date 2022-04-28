@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:background="@android:color/background_light"
+    android:minHeight="25px">
+    <EditText
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="482.3dp"
+        android:id="@+id/textoeditavel"
+        android:textColor="#368DEB"
+        android:text="Insira aqui as suas notas..."
+        android:layout_marginBottom="363.7dp"
+        android:layout_gravity="bottom"
+        android:gravity="top" />
+</LinearLayout>

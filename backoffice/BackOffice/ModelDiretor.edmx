@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelDiretor.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Caso">
+          <Key>
+            <PropertyRef Name="IdCaso" />
+          </Key>
+          <Property Name="IdCaso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descricao" Type="text" Nullable="false" />
+          <Property Name="Objetivos" Type="text" Nullable="false" />
+          <Property Name="Relatorio" Type="nvarchar" MaxLength="40" />
+          <Property Name="idUtilizadorResponsavel" Type="int" Nullable="false" />
+          <Property Name="Terminado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="IdUtilizador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IdChefe" Type="int" />
+          <Property Name="IdTipoUtilizador" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LI4-Agentes.dbo.viewEquipas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="viewEquipas">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+            <PropertyRef Name="Nome" />
+          </Key>
+          <Property Name="IdUtilizador" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TarefasDecorrer" Type="int" />
+          <Property Name="InspetorChefe" Type="nvarchar" MaxLength="30" />
+          <Property Name="IdInspetorChefe" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LI4-Agentes.dbo.viewInspetoresChefe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="viewInspetoresChefe">
+          <Key>
+            <PropertyRef Name="Nome" />
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IdUtilizador" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Caso_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="Caso" Type="Self.Caso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Caso">
+              <PropertyRef Name="idUtilizadorResponsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizador_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="0..1" />
+          <End Role="Utilizador1" Type="Self.Utilizador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Utilizador1">
+              <PropertyRef Name="IdChefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelDiretorStoreContainer">
+          <EntitySet Name="Caso" EntityType="Self.Caso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizador" EntityType="Self.Utilizador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viewEquipas" EntityType="Self.viewEquipas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewEquipas].[IdUtilizador] AS [IdUtilizador], 
+    [viewEquipas].[Nome] AS [Nome], 
+    [viewEquipas].[TarefasDecorrer] AS [TarefasDecorrer], 
+    [viewEquipas].[InspetorChefe] AS [InspetorChefe], 
+    [viewEquipas].[IdInspetorChefe] AS [IdInspetorChefe]
+    FROM [dbo].[viewEquipas] AS [viewEquipas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="viewInspetoresChefe" EntityType="Self.viewInspetoresChefe" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewInspetoresChefe].[Nome] AS [Nome], 
+    [viewInspetoresChefe].[IdUtilizador] AS [IdUtilizador]
+    FROM [dbo].[viewInspetoresChefe] AS [viewInspetoresChefe]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Caso_Utilizador" Association="Self.FK_Caso_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Caso" EntitySet="Caso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilizador_Utilizador" Association="Self.FK_Utilizador_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Utilizador1" EntitySet="Utilizador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelDiretor" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Caso">
+          <Key>
+            <PropertyRef Name="IdCaso" />
+          </Key>
+          <Property Name="IdCaso" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Objetivos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Relatorio" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="idUtilizadorResponsavel" Type="Int32" Nullable="false" />
+          <Property Name="Terminado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Utilizador" Relationship="Self.FK_Caso_Utilizador" FromRole="Caso" ToRole="Utilizador" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="IdUtilizador" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdChefe" Type="Int32" />
+          <NavigationProperty Name="Caso" Relationship="Self.FK_Caso_Utilizador" FromRole="Utilizador" ToRole="Caso" />
+          <NavigationProperty Name="Utilizador1" Relationship="Self.FK_Utilizador_Utilizador" FromRole="Utilizador" ToRole="Utilizador1" />
+          <NavigationProperty Name="Utilizador2" Relationship="Self.FK_Utilizador_Utilizador" FromRole="Utilizador1" ToRole="Utilizador" />
+          <Property Name="IdTipoUtilizador" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Caso_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="Caso" Type="Self.Caso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Caso">
+              <PropertyRef Name="idUtilizadorResponsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizador_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="0..1" />
+          <End Role="Utilizador1" Type="Self.Utilizador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Utilizador1">
+              <PropertyRef Name="IdChefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesDiretor" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Caso" EntityType="Self.Caso" />
+          <EntitySet Name="Utilizador" EntityType="Self.Utilizador" />
+          <AssociationSet Name="FK_Caso_Utilizador" Association="Self.FK_Caso_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Caso" EntitySet="Caso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilizador_Utilizador" Association="Self.FK_Utilizador_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Utilizador1" EntitySet="Utilizador" />
+          </AssociationSet>
+          <EntitySet Name="viewInspetoresChefe" EntityType="ModelDiretor.viewInspetoresChefe" />
+          <EntitySet Name="viewEquipas" EntityType="ModelDiretor.viewEquipas" />
+        </EntityContainer>
+        <EntityType Name="viewInspetoresChefe">
+          <Key>
+            <PropertyRef Name="Nome" />
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IdUtilizador" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="viewEquipas">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+            <PropertyRef Name="Nome" />
+          </Key>
+          <Property Name="IdUtilizador" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TarefasDecorrer" Type="Int32" />
+          <Property Name="InspetorChefe" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IdInspetorChefe" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelDiretorStoreContainer" CdmEntityContainer="EntitiesDiretor">
+          <EntitySetMapping Name="Caso">
+            <EntityTypeMapping TypeName="ModelDiretor.Caso">
+              <MappingFragment StoreEntitySet="Caso">
+                <ScalarProperty Name="IdCaso" ColumnName="IdCaso" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Objetivos" ColumnName="Objetivos" />
+                <ScalarProperty Name="Relatorio" ColumnName="Relatorio" />
+                <ScalarProperty Name="idUtilizadorResponsavel" ColumnName="idUtilizadorResponsavel" />
+                <ScalarProperty Name="Terminado" ColumnName="Terminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizador">
+            <EntityTypeMapping TypeName="ModelDiretor.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizador">
+                <ScalarProperty Name="IdTipoUtilizador" ColumnName="IdTipoUtilizador" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdChefe" ColumnName="IdChefe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewInspetoresChefe">
+            <EntityTypeMapping TypeName="ModelDiretor.viewInspetoresChefe">
+              <MappingFragment StoreEntitySet="viewInspetoresChefe">
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewEquipas">
+            <EntityTypeMapping TypeName="ModelDiretor.viewEquipas">
+              <MappingFragment StoreEntitySet="viewEquipas">
+                <ScalarProperty Name="IdInspetorChefe" ColumnName="IdInspetorChefe" />
+                <ScalarProperty Name="InspetorChefe" ColumnName="InspetorChefe" />
+                <ScalarProperty Name="TarefasDecorrer" ColumnName="TarefasDecorrer" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

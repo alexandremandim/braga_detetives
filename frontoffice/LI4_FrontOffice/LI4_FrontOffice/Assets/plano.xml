@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PlanoAtividades IdAgente="4" Password="rui">
+
+	<Tarefa IdTarefa="10" NomeCaso= "Roubo em Braga" IdCaso ="2" Titulo = "Espiar Carlos" Realizada="false" Latitude="41,561937" Longitude="-8,396994" >
+		<LocalizacaoTexto>Rua da Universidade, Gualtar</LocalizacaoTexto>
+		<Descricao> Ir atras dele </Descricao>
+		<Objetivos>
+			<Objetivo> Apanha-lo a roubar o cafe </Objetivo>
+			<Objetivo> Apanha-lo a roubar a loja </Objetivo>
+		</Objetivos>
+		<Dados>
+			<Imagem Caminho ="/fotos/img1.png" Latitude="41" Longitude="-8,396994" Data="11/04/2014 11:45:34"/>
+			<Gravacao Caminho ="/gravacoes/grav2" Latitude= "41,561937" Longitude="54,37" Data="11/04/2014 11:45:34"/>
+      <NotaEscrita Caminho ="/notas/ff" Latitude= "22" Longitude="11" Data="11/04/2014 11:45:34"/>
+		</Dados>
+	</Tarefa>
+	
+	<Tarefa IdTarefa="11" NomeCaso = "Morte na Barca" IdCaso ="3" Titulo = "Recolher provas incriminatorias" Realizada="false" Latitude="41,561937" Longitude="-8,396994">
+		<LocalizacaoTexto>Monte do Rafa, Barca</LocalizacaoTexto>
+		<Descricao> Arranjar provas para incriminar o Malaquias </Descricao>
+		<Objetivos>
+			<Objetivo> Recolher todas as provas possiveis </Objetivo>
+		</Objetivos>
+		<Dados>
+			<Imagem Caminho = "/fotos/img1.png" Latitude= "41,561937" Longitude="54,37" Data="11/04/2014 11:45:34"/>
+			<Gravacao Caminho ="/gravacoes/grav2" Latitude= "41,561937" Longitude="54,37" Data="11/04/2014 11:45:34"/>
+			<NotaEscrita Caminho ="/notas/ff" Latitude= "22" Longitude="11" Data="11/04/2014 11:45:34"/>
+		</Dados>
+	</Tarefa>
+
+  <Tarefa IdTarefa="13" NomeCaso = "Trafico de armas em Donões" IdCaso ="3" Titulo = "Encontrar armas em Donões" Realizada="false" Latitude="41,561937" Longitude="-8,396994">
+    <LocalizacaoTexto>Rua da casa do Daniel, Donões</LocalizacaoTexto>
+    <Descricao> o Zé esticado deu um tiro na perna ao Malaquias </Descricao>
+    <Objetivos>
+      <Objetivo> Encontrar armas para incriminar o José Esticado</Objetivo>
+    </Objetivos>
+    <Dados>
+      <Imagem Caminho = "/fotos/img1,png" Latitude= "41,561937" Longitude="54,37" Data="11/04/2014 11:45:34"/>
+      <Gravacao Caminho ="/gravacoes/grav2" Latitude= "41,561937" Longitude="54,37"  Data="11/04/2014 11:45:34"/>
+      <NotaEscrita Caminho ="/notas/ff" Latitude= "22" Longitude="11"  Data="11/04/2014 11:45:34"/>
+    </Dados>
+  </Tarefa>
+
+  <Tarefa IdTarefa="14" NomeCaso = "Envenamento de água na Póvoa" IdCaso ="31" Titulo = "Interrogar Chico Fisgas" Realizada="false" Latitude="41,561937" Longitude="-8,396994">
+    <LocalizacaoTexto> Rua do Chico Fisgas, Povoa de Varzim</LocalizacaoTexto>
+    <Descricao> o Chico Fisgas tem informações preciosas </Descricao>
+    <Objetivos>
+      <Objetivo> Obter informações</Objetivo>
+    </Objetivos>
+    <Dados>
+      <Imagem Caminho = "/fotos/img1.png" Latitude= "41,561937" Longitude="54,37"  Data="11/04/2014 11:45:34"/>
+      <NotaEscrita Caminho ="/notas/ff" Latitude= "22" Longitude="11"  Data="11/04/2014 11:45:34"/>
+    </Dados>
+  </Tarefa>
+
+</PlanoAtividades>

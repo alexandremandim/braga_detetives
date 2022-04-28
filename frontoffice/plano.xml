@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PlanoAtividades NomeAgente="Jose Paulo" Password="raposaseca">
+
+	<Tarefa IdTarefa="1" NomeCaso= "Roubo em Braga" IdCaso ="2" Titulo = "Espiar Carlos" Realizada="false" Latitude="41.561937" Longitude="-8.396994" >
+		<LocalizacaoTexto></LocalizacaoTexto>
+		<Descricao> Ir atras dele </Descricao>
+		<Objetivos>
+			<Objetivo> Apanha-lo a roubar o cafe </Objetivo>
+			<Objetivo> Apanha-lo a roubar a loja </Objetivo>
+		</Objetivos>
+		<Dados>
+			<Imagem caminho = "\fotos\img1.png" Latitude= "41.561937" Longitude="54.37" Data ="2014-11-04 11:45:34"/>
+			<Gravacao caminho ="\gravacoes\grav2" Latitude= "41.561937" Longitude="54.37" Data ="2014-11-04 11:45:34"/>
+			<NotaEscrita Latitude= "22" Longitude="15" Data ="2014-11-04 11:45:34">
+				Ele foi la, mas so roubou guardanapos
+			</NotaEscrita>
+		</Dados>
+	</Tarefa>
+	
+	<Tarefa IdTarefa="2" NomeCaso = "Morte na Barca" IdCaso ="3" Titulo = "Recolher provas incriminatorias" Realizada="false" Latitude="41.561937" Longitude="-8.396994">
+		<LocalizacaoTexto></LocalizacaoTexto>
+		<Descricao> Arranjar provas para incriminar o Malaquias </Descricao>
+		<Objetivos>
+			<Objetivo> Recolher todas as provas possiveis </Objetivo>
+		</Objetivos>
+		<Dados>
+			<Imagem caminho = "\fotos\img1.png" Latitude= "41.561937" Longitude="54.37" Data ="2014-11-04 11:45:34"/>
+			<Gravacao caminho ="\gravacoes\grav2" Latitude= "41.561937" Longitude="54.37" Data ="2014-11-04 11:45:34"/>
+			<NotaEscrita Latitude= "22" Longitude="11" Data ="2014-11-04 11:45:34">
+				
+			</NotaEscrita>
+		</Dados>
+	</Tarefa>
+
+</PlanoAtividades>

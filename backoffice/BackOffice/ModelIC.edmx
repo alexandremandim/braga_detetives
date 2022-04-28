@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Caso">
+          <Key>
+            <PropertyRef Name="IdCaso" />
+          </Key>
+          <Property Name="IdCaso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descricao" Type="text" Nullable="false" />
+          <Property Name="Objetivos" Type="text" Nullable="false" />
+          <Property Name="Relatorio" Type="nvarchar" MaxLength="40" />
+          <Property Name="idUtilizadorResponsavel" Type="int" Nullable="false" />
+          <Property Name="Terminado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dados">
+          <Key>
+            <PropertyRef Name="IdDado" />
+          </Key>
+          <Property Name="IdDado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Caminho" Type="nvarchar" MaxLength="30" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="IdTarefa" Type="int" />
+          <Property Name="IdTipoDado" Type="int" />
+        </EntityType>
+        <EntityType Name="Tarefa">
+          <Key>
+            <PropertyRef Name="IdTarefa" />
+          </Key>
+          <Property Name="IdTarefa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descricao" Type="text" Nullable="false" />
+          <Property Name="Objetivos" Type="text" Nullable="false" />
+          <Property Name="Realizada" Type="bit" Nullable="false" />
+          <Property Name="Exportada" Type="bit" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="IdAgente" Type="int" Nullable="false" />
+          <Property Name="IdCaso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="IdUtilizador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IdChefe" Type="int" />
+          <Property Name="IdTipoUtilizador" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LI4-Agentes.dbo.viewEquipas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="viewEquipas">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+            <PropertyRef Name="Nome" />
+          </Key>
+          <Property Name="IdUtilizador" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TarefasDecorrer" Type="int" />
+          <Property Name="InspetorChefe" Type="nvarchar" MaxLength="30" />
+          <Property Name="IdInspetorChefe" Type="int" />
+        </EntityType>
+        <Association Name="FK_Caso_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="Caso" Type="Self.Caso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Caso">
+              <PropertyRef Name="idUtilizadorResponsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dados_Tarefa">
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="0..1" />
+          <End Role="Dados" Type="Self.Dados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarefa">
+              <PropertyRef Name="IdTarefa" />
+            </Principal>
+            <Dependent Role="Dados">
+              <PropertyRef Name="IdTarefa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefa_Caso">
+          <End Role="Caso" Type="Self.Caso" Multiplicity="1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caso">
+              <PropertyRef Name="IdCaso" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdCaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefa_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdAgente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizador_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="0..1" />
+          <End Role="Utilizador1" Type="Self.Utilizador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Utilizador1">
+              <PropertyRef Name="IdChefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AgentesEnvolvidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCaso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CasosAtivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idIC" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dadosRelatorioAgente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idAgente" Type="int" Mode="In" />
+          <Parameter Name="idCaso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TarefasIC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idIC" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TarefasNaoSincronizadas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInspetorChefe" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Caso" EntityType="Self.Caso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dados" EntityType="Self.Dados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarefa" EntityType="Self.Tarefa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizador" EntityType="Self.Utilizador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viewEquipas" EntityType="Self.viewEquipas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewEquipas].[IdUtilizador] AS [IdUtilizador], 
+    [viewEquipas].[Nome] AS [Nome], 
+    [viewEquipas].[TarefasDecorrer] AS [TarefasDecorrer], 
+    [viewEquipas].[InspetorChefe] AS [InspetorChefe], 
+    [viewEquipas].[IdInspetorChefe] AS [IdInspetorChefe]
+    FROM [dbo].[viewEquipas] AS [viewEquipas]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Caso_Utilizador" Association="Self.FK_Caso_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Caso" EntitySet="Caso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dados_Tarefa" Association="Self.FK_Dados_Tarefa">
+            <End Role="Tarefa" EntitySet="Tarefa" />
+            <End Role="Dados" EntitySet="Dados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefa_Caso" Association="Self.FK_Tarefa_Caso">
+            <End Role="Caso" EntitySet="Caso" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefa_Utilizador" Association="Self.FK_Tarefa_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilizador_Utilizador" Association="Self.FK_Utilizador_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Utilizador1" EntitySet="Utilizador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Caso">
+          <Key>
+            <PropertyRef Name="IdCaso" />
+          </Key>
+          <Property Name="IdCaso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Objetivos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Relatorio" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="idUtilizadorResponsavel" Type="Int32" Nullable="false" />
+          <Property Name="Terminado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Utilizador" Relationship="Self.FK_Caso_Utilizador" FromRole="Caso" ToRole="Utilizador" />
+          <NavigationProperty Name="Tarefa" Relationship="Self.FK_Tarefa_Caso" FromRole="Caso" ToRole="Tarefa" />
+        </EntityType>
+        <EntityType Name="Dados">
+          <Key>
+            <PropertyRef Name="IdDado" />
+          </Key>
+          <Property Name="IdDado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caminho" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="IdTarefa" Type="Int32" />
+          <Property Name="IdTipoDado" Type="Int32" />
+          <NavigationProperty Name="Tarefa" Relationship="Self.FK_Dados_Tarefa" FromRole="Dados" ToRole="Tarefa" />
+        </EntityType>
+        <EntityType Name="Tarefa">
+          <Key>
+            <PropertyRef Name="IdTarefa" />
+          </Key>
+          <Property Name="IdTarefa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Objetivos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Realizada" Type="Boolean" Nullable="false" />
+          <Property Name="Exportada" Type="Boolean" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="IdAgente" Type="Int32" Nullable="false" />
+          <Property Name="IdCaso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Caso" Relationship="Self.FK_Tarefa_Caso" FromRole="Tarefa" ToRole="Caso" />
+          <NavigationProperty Name="Dados" Relationship="Self.FK_Dados_Tarefa" FromRole="Tarefa" ToRole="Dados" />
+          <NavigationProperty Name="Utilizador" Relationship="Self.FK_Tarefa_Utilizador" FromRole="Tarefa" ToRole="Utilizador" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="IdUtilizador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdChefe" Type="Int32" />
+          <Property Name="IdTipoUtilizador" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Caso" Relationship="Self.FK_Caso_Utilizador" FromRole="Utilizador" ToRole="Caso" />
+          <NavigationProperty Name="Tarefa" Relationship="Self.FK_Tarefa_Utilizador" FromRole="Utilizador" ToRole="Tarefa" />
+          <NavigationProperty Name="Utilizador1" Relationship="Self.FK_Utilizador_Utilizador" FromRole="Utilizador" ToRole="Utilizador1" />
+          <NavigationProperty Name="Utilizador2" Relationship="Self.FK_Utilizador_Utilizador" FromRole="Utilizador1" ToRole="Utilizador" />
+        </EntityType>
+        <EntityType Name="viewEquipas">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+            <PropertyRef Name="Nome" />
+          </Key>
+          <Property Name="IdUtilizador" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TarefasDecorrer" Type="Int32" />
+          <Property Name="InspetorChefe" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IdInspetorChefe" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Caso_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="Caso" Type="Self.Caso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Caso">
+              <PropertyRef Name="idUtilizadorResponsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefa_Caso">
+          <End Role="Caso" Type="Self.Caso" Multiplicity="1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caso">
+              <PropertyRef Name="IdCaso" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdCaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dados_Tarefa">
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="0..1" />
+          <End Role="Dados" Type="Self.Dados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarefa">
+              <PropertyRef Name="IdTarefa" />
+            </Principal>
+            <Dependent Role="Dados">
+              <PropertyRef Name="IdTarefa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefa_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdAgente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizador_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="0..1" />
+          <End Role="Utilizador1" Type="Self.Utilizador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="IdUtilizador" />
+            </Principal>
+            <Dependent Role="Utilizador1">
+              <PropertyRef Name="IdChefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesIC" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Caso" EntityType="Self.Caso" />
+          <EntitySet Name="Dados" EntityType="Self.Dados" />
+          <EntitySet Name="Tarefa" EntityType="Self.Tarefa" />
+          <EntitySet Name="Utilizador" EntityType="Self.Utilizador" />
+          <EntitySet Name="viewEquipas" EntityType="Self.viewEquipas" />
+          <AssociationSet Name="FK_Caso_Utilizador" Association="Self.FK_Caso_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Caso" EntitySet="Caso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefa_Caso" Association="Self.FK_Tarefa_Caso">
+            <End Role="Caso" EntitySet="Caso" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dados_Tarefa" Association="Self.FK_Dados_Tarefa">
+            <End Role="Tarefa" EntitySet="Tarefa" />
+            <End Role="Dados" EntitySet="Dados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefa_Utilizador" Association="Self.FK_Tarefa_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilizador_Utilizador" Association="Self.FK_Utilizador_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="Utilizador1" EntitySet="Utilizador" />
+          </AssociationSet>
+          <FunctionImport Name="TarefasNaoSincronizadas" ReturnType="Collection(Model.TarefasNaoSincronizadas_Result)">
+          <Parameter Name="idInspetorChefe" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CasosAtivos" ReturnType="Collection(Model.CasosAtivos_Result1)">
+          <Parameter Name="idIC" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TarefasIC" ReturnType="Collection(Model.TarefasIC_Result1)">
+          <Parameter Name="idIC" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AgentesEnvolvidos" ReturnType="Collection(Model.AgentesEnvolvidos_Result)">
+          <Parameter Name="idCaso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dadosRelatorioAgente" ReturnType="Collection(Model.dadosRelatorioAgente_Result)">
+            <Parameter Name="idAgente" Mode="In" Type="Int32" />
+            <Parameter Name="idCaso" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="TarefasNaoSincronizadas_Result">
+          <Property Type="Int32" Name="IdTarefa" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Objetivos" Nullable="false" MaxLength="Max" />
+          <Property Type="Double" Name="Latitude" Nullable="false" />
+          <Property Type="Double" Name="Longitude" Nullable="false" />
+          <Property Type="String" Name="NomeCaso" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="CasosAtivos_Result">
+          <Property Type="Int32" Name="IdCaso" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Objetivos" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Relatorio" Nullable="true" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="CasosAtivos1_Result">
+          <Property Type="Int32" Name="IdCaso" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Objetivos" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Relatorio" Nullable="true" MaxLength="40" />
+          <Property Type="Boolean" Name="Terminado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CasosAtivos_Result1">
+          <Property Type="Int32" Name="IdCaso" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Objetivos" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Relatorio" Nullable="true" MaxLength="40" />
+          <Property Type="Boolean" Name="Terminado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="TarefasIC_Result">
+          <Property Type="Int32" Name="IdTarefa" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Objetivos" Nullable="false" MaxLength="Max" />
+          <Property Type="Double" Name="Latitude" Nullable="false" />
+          <Property Type="Double" Name="Longitude" Nullable="false" />
+          <Property Type="String" Name="NomeCaso" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Agente" Nullable="false" MaxLength="30" />
+          <Property Type="Boolean" Name="Realizada" Nullable="false" />
+          <Property Type="Boolean" Name="Exportada" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="TarefasIC_Result1">
+          <Property Type="Int32" Name="IdTarefa" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Objetivos" Nullable="false" MaxLength="Max" />
+          <Property Type="Double" Name="Latitude" Nullable="false" />
+          <Property Type="Double" Name="Longitude" Nullable="false" />
+          <Property Type="String" Name="NomeCaso" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="IdAgente" Nullable="false" />
+          <Property Type="String" Name="Agente" Nullable="false" MaxLength="30" />
+          <Property Type="Boolean" Name="Realizada" Nullable="false" />
+          <Property Type="Boolean" Name="Exportada" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="AgentesEnvolvidos_Result">
+          <Property Type="Int32" Name="IdUtilizador" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="dadosRelatorioAgente_Result">
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="NumeroDados" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="EntitiesIC">
+          <EntitySetMapping Name="Caso">
+            <EntityTypeMapping TypeName="Model.Caso">
+              <MappingFragment StoreEntitySet="Caso">
+                <ScalarProperty Name="IdCaso" ColumnName="IdCaso" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Objetivos" ColumnName="Objetivos" />
+                <ScalarProperty Name="Relatorio" ColumnName="Relatorio" />
+                <ScalarProperty Name="idUtilizadorResponsavel" ColumnName="idUtilizadorResponsavel" />
+                <ScalarProperty Name="Terminado" ColumnName="Terminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dados">
+            <EntityTypeMapping TypeName="Model.Dados">
+              <MappingFragment StoreEntitySet="Dados">
+                <ScalarProperty Name="IdDado" ColumnName="IdDado" />
+                <ScalarProperty Name="Caminho" ColumnName="Caminho" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IdTarefa" ColumnName="IdTarefa" />
+                <ScalarProperty Name="IdTipoDado" ColumnName="IdTipoDado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarefa">
+            <EntityTypeMapping TypeName="Model.Tarefa">
+              <MappingFragment StoreEntitySet="Tarefa">
+                <ScalarProperty Name="IdTarefa" ColumnName="IdTarefa" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Objetivos" ColumnName="Objetivos" />
+                <ScalarProperty Name="Realizada" ColumnName="Realizada" />
+                <ScalarProperty Name="Exportada" ColumnName="Exportada" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IdAgente" ColumnName="IdAgente" />
+                <ScalarProperty Name="IdCaso" ColumnName="IdCaso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizador">
+            <EntityTypeMapping TypeName="Model.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizador">
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdChefe" ColumnName="IdChefe" />
+                <ScalarProperty Name="IdTipoUtilizador" ColumnName="IdTipoUtilizador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewEquipas">
+            <EntityTypeMapping TypeName="Model.viewEquipas">
+              <MappingFragment StoreEntitySet="viewEquipas">
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="TarefasDecorrer" ColumnName="TarefasDecorrer" />
+                <ScalarProperty Name="InspetorChefe" ColumnName="InspetorChefe" />
+                <ScalarProperty Name="IdInspetorChefe" ColumnName="IdInspetorChefe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="TarefasNaoSincronizadas" FunctionName="Model.Store.TarefasNaoSincronizadas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.TarefasNaoSincronizadas_Result">
+                <ScalarProperty Name="IdTarefa" ColumnName="IdTarefa" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Objetivos" ColumnName="Objetivos" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="NomeCaso" ColumnName="NomeCaso" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CasosAtivos" FunctionName="Model.Store.CasosAtivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.CasosAtivos_Result1">
+                <ScalarProperty Name="IdCaso" ColumnName="IdCaso" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Objetivos" ColumnName="Objetivos" />
+                <ScalarProperty Name="Relatorio" ColumnName="Relatorio" />
+                <ScalarProperty Name="Terminado" ColumnName="Terminado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TarefasIC" FunctionName="Model.Store.TarefasIC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.TarefasIC_Result1">
+                <ScalarProperty Name="IdTarefa" ColumnName="IdTarefa" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Objetivos" ColumnName="Objetivos" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="NomeCaso" ColumnName="NomeCaso" />
+                <ScalarProperty Name="IdAgente" ColumnName="IdAgente" />
+                <ScalarProperty Name="Agente" ColumnName="Agente" />
+                <ScalarProperty Name="Realizada" ColumnName="Realizada" />
+                <ScalarProperty Name="Exportada" ColumnName="Exportada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AgentesEnvolvidos" FunctionName="Model.Store.AgentesEnvolvidos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.AgentesEnvolvidos_Result">
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="dadosRelatorioAgente" FunctionName="Model.Store.dadosRelatorioAgente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.dadosRelatorioAgente_Result">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="NumeroDados" ColumnName="NumeroDados" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

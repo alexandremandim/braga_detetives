@@ -1,0 +1,22 @@
+﻿<Window x:Class="BackOffice.CriarCaso"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BackOffice"
+        mc:Ignorable="d"
+        Title="Criar caso" Height="400" Width="550">
+    <Grid>
+        <TextBox x:Name="txtBoxNomeCaso" HorizontalAlignment="Left" Height="24" Margin="201,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label x:Name="lblNomeCaso" Content="Nome" HorizontalAlignment="Left" Margin="43,52,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescricao" Content="Descrição" HorizontalAlignment="Left" Margin="43,109,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxDescricao" HorizontalAlignment="Left" Height="23" Margin="201,109,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Label x:Name="lblObjetivos" Content="Objetivos" HorizontalAlignment="Left" Margin="43,171,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxObjetivos" HorizontalAlignment="Left" Height="23" Margin="201,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="264"/>
+        <Button x:Name="buttonCancel" Content="Cancelar" HorizontalAlignment="Left" Margin="388,295,0,0" VerticalAlignment="Top" Width="74" Click="cancelar_Click"/>
+        <Button x:Name="buttonConfirm" Content="OK" HorizontalAlignment="Left" Margin="300,295,0,0" VerticalAlignment="Top" Width="74" Click="button_Click"/>
+        <Label x:Name="label" Content="Inspetor Responsavel" HorizontalAlignment="Left" Margin="47,226,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbInspetores" HorizontalAlignment="Left" Margin="201,226,0,0" VerticalAlignment="Top" Width="264"/>
+
+    </Grid>
+</Window>
